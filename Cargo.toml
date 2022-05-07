@@ -14,6 +14,6 @@ keywords = ["ethereum"]
 
 [dependencies]
 hex = "0.4.3"
-primitive-types = { version = "0.11.1", features = ["serde"] }
+primitive-types = { version = "0.11.1", default-features = false, features = ["serde_no_std", "rustc-hex"] }
 serde = { version = "1", features = ["derive"] }
 ureq = { version = "2.4.0", features = ["json"] }
