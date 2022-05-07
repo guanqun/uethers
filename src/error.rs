@@ -1,4 +1,3 @@
-// TODO: split to error.rs
 #[derive(Debug)]
 pub enum UEthersError {
     Request(ureq::Error),
