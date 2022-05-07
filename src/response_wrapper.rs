@@ -1,4 +1,4 @@
-use crate::models::BlockRpcResponse;
+use crate::models::{BlockRpcResponse, TransactionRpcResponse};
 use primitive_types::{H256, U256};
 use serde::Deserialize;
 
@@ -22,4 +22,9 @@ pub(crate) struct ResponseWrapperForBytes {
 #[derive(Deserialize)]
 pub(crate) struct ResponseWrapperForBlock {
     pub result: BlockRpcResponse,
+}
+
+#[derive(Deserialize)]
+pub(crate) struct ResponseWrapperForTransaction {
+    pub result: TransactionRpcResponse,
 }

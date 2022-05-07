@@ -10,6 +10,7 @@ Supported RPC endpoints so far:
 4. eth_getTransactionCount
 5. eth_getCode
 6. eth_getBlockByNumber
+7. eth_getTransactionByHash
 
 
 Why?
