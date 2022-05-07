@@ -54,6 +54,16 @@ pub struct TransactionRpcResponse {
         deserialize_with = "crate::decoder::deserialize_u256_from_hex_optional"
     )]
     pub gas_price: Option<U256>,
+    #[serde(
+        rename = "maxPriorityFeePerGas",
+        deserialize_with = "crate::decoder::deserialize_u256_from_hex_optional"
+    )]
+    pub max_priority_fee_per_gas: Option<U256>,
+    #[serde(
+        rename = "maxFeePerGas",
+        deserialize_with = "crate::decoder::deserialize_u256_from_hex_optional"
+    )]
+    pub max_fee_per_gas: Option<U256>,
     /// hash of the transaction
     pub hash: H256,
     /// the data sent along with the transaction
