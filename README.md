@@ -14,4 +14,5 @@ Supported RPC endpoints so far:
 
 Why?
 
-For some small projects, I don't want to pull in lots of async crates used by `ethers-rs`.
+1. For some small projects, I don't want to pull in lots of async crates used by `ethers-rs`.
+2. The main use case for me is to implement EVM backend which just uses some preliminary RPC endpoints.
