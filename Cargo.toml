@@ -8,13 +8,11 @@ readme = "README.md"
 documentation = "https://docs.rs/uethers"
 repository = "https://github.com/guanqun/uethers"
 homepage = "https://docs.rs/uethers"
-description = """
-Minimal Ethereum library in Rust.
-"""
+description = "Minimal Ethereum library in Rust."
+keywords = ["ethereum"]
 
 
 [dependencies]
-ethereum = "0.12.0"
 hex = "0.4.3"
 primitive-types = { version = "0.11.1", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
