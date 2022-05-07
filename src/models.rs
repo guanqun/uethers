@@ -48,6 +48,8 @@ pub struct TransactionRpcResponse {
     pub block_number: Option<U256>,
     /// address of the sender
     pub from: H160,
+    #[serde(deserialize_with = "crate::decoder::deserialize_u256_from_hex")]
+    pub gas: U256,
     /// gas provided by the sender
     #[serde(
         rename = "gasPrice",
