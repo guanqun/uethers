@@ -1,7 +1,17 @@
 [package]
 name = "uethers"
 version = "0.1.0"
+authors = ["Guanqun Lu <guanqunlu@outlook.com>"]
 edition = "2021"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+documentation = "https://docs.rs/uethers"
+repository = "https://github.com/guanqun/uethers"
+homepage = "https://docs.rs/uethers"
+description = """
+Minimal Ethereum library in Rust.
+"""
+
 
 [dependencies]
 ethereum = "0.12.0"
