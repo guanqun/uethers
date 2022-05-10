@@ -1,6 +1,6 @@
 uethers
 
-A very lightweight synchronous Ethereum client.
+A Minimal Ethereum RPC Client in Rust.
 
 Supported RPC endpoints so far:
 
