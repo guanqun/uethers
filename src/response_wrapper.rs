@@ -4,7 +4,6 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 pub(crate) struct ResponseWrapperForU256 {
-    #[serde(deserialize_with = "crate::decoder::deserialize_u256_from_hex")]
     pub result: U256,
 }
 
