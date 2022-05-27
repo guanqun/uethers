@@ -64,6 +64,28 @@ pub struct TransactionRpcResponse {
     pub s: U256,
 }
 
+#[derive(Debug, Clone, Deserialize)]
+pub struct TransactionReceipt {
+    #[serde(rename = "transactionHash")]
+    pub transaction_hash: H256,
+    #[serde(rename = "transactionIndex")]
+    pub transaction_index: U256,
+    #[serde(rename = "blockHash")]
+    pub block_hash: H256,
+    #[serde(rename = "blockNumber")]
+    pub block_number: U256,
+    pub from: H160,
+    pub to: H160,
+    #[serde(rename = "cumulativeGasUsed")]
+    pub cumulative_gas_used: U256,
+    #[serde(rename = "gasUsed")]
+    pub gas_used: U256,
+    #[serde(rename = "contractAddress")]
+    pub contract_address: Option<H160>,
+    // TODO: add logs and logsBloom
+    pub status: U256,
+}
+
 #[cfg(test)]
 mod tests {
     use crate::TransactionRpcResponse;

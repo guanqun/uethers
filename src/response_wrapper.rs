@@ -1,4 +1,6 @@
-use crate::models::{BlockRpcResponse, FullBlockRpcResponse, TransactionRpcResponse};
+use crate::models::{
+    BlockRpcResponse, FullBlockRpcResponse, TransactionReceipt, TransactionRpcResponse,
+};
 use primitive_types::{H256, U256};
 use serde::Deserialize;
 
@@ -30,5 +32,10 @@ pub(crate) struct ResponseWrapperForFullBlock {
 
 #[derive(Deserialize)]
 pub(crate) struct ResponseWrapperForTransaction {
-    pub result: TransactionRpcResponse,
+    pub result: Option<TransactionRpcResponse>,
+}
+
+#[derive(Deserialize)]
+pub(crate) struct ResponseWrapperForTransactionReceipt {
+    pub result: Option<TransactionReceipt>,
 }

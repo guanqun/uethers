@@ -3,8 +3,10 @@ use crate::error::UEthersError;
 use crate::models::{BlockRpcResponse, FullBlockRpcResponse, TransactionRpcResponse};
 use crate::response_wrapper::{
     ResponseWrapperForBlock, ResponseWrapperForBytes, ResponseWrapperForFullBlock,
-    ResponseWrapperForH256, ResponseWrapperForTransaction, ResponseWrapperForU256,
+    ResponseWrapperForH256, ResponseWrapperForTransaction, ResponseWrapperForTransactionReceipt,
+    ResponseWrapperForU256,
 };
+use crate::TransactionReceipt;
 use primitive_types::{H160, H256, U256};
 use ureq::Agent;
 
@@ -152,10 +154,11 @@ impl UEthers {
         Ok(wrapper.result)
     }
 
+    /// Returns the information about a transaction requested by transaction hash.
     pub fn get_transaction_by_hash(
         &self,
         tx_hash: H256,
-    ) -> Result<TransactionRpcResponse, UEthersError> {
+    ) -> Result<Option<TransactionRpcResponse>, UEthersError> {
         let wrapper: ResponseWrapperForTransaction = self
             .agent
             .get(self.rpc.as_str())
@@ -163,6 +166,24 @@ impl UEthers {
                 "jsonrpc": "2.0",
                 "id": 1,
                 "method": "eth_getTransactionByHash",
+                "params": [tx_hash],
+            }))?
+            .into_json()?;
+        Ok(wrapper.result)
+    }
+
+    /// Returns the receipt of a transaction by transaction hash.
+    pub fn get_transaction_receipt(
+        &self,
+        tx_hash: H256,
+    ) -> Result<Option<TransactionReceipt>, UEthersError> {
+        let wrapper: ResponseWrapperForTransactionReceipt = self
+            .agent
+            .get(self.rpc.as_str())
+            .send_json(ureq::json!({
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "eth_getTransactionReceipt",
                 "params": [tx_hash],
             }))?
             .into_json()?;
@@ -222,5 +243,15 @@ mod tests {
             )
             .unwrap();
         dbg!(transaction);
+
+        let receipt = client
+            .get_transaction_receipt(
+                H256::from_str(
+                    "0x5c2282f67461604c2d91351b6a685f0be7c16b1d8bc11ee967df513892bc7262",
+                )
+                .unwrap(),
+            )
+            .unwrap();
+        dbg!(receipt);
     }
 }
