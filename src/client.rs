@@ -1,9 +1,9 @@
 use crate::block_identifier::BlockIdentifier;
 use crate::error::UEthersError;
-use crate::models::{BlockRpcResponse, TransactionRpcResponse};
+use crate::models::{BlockRpcResponse, FullBlockRpcResponse, TransactionRpcResponse};
 use crate::response_wrapper::{
-    ResponseWrapperForBlock, ResponseWrapperForBytes, ResponseWrapperForH256,
-    ResponseWrapperForTransaction, ResponseWrapperForU256,
+    ResponseWrapperForBlock, ResponseWrapperForBytes, ResponseWrapperForFullBlock,
+    ResponseWrapperForH256, ResponseWrapperForTransaction, ResponseWrapperForU256,
 };
 use primitive_types::{H160, H256, U256};
 use ureq::Agent;
@@ -135,6 +135,23 @@ impl UEthers {
         Ok(wrapper.result)
     }
 
+    pub fn get_full_block_by_number(
+        &self,
+        at_block: BlockIdentifier,
+    ) -> Result<FullBlockRpcResponse, UEthersError> {
+        let wrapper: ResponseWrapperForFullBlock = self
+            .agent
+            .get(self.rpc.as_str())
+            .send_json(ureq::json!({
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "eth_getBlockByNumber",
+                "params": [at_block, true],
+            }))?
+            .into_json()?;
+        Ok(wrapper.result)
+    }
+
     pub fn get_transaction_by_hash(
         &self,
         tx_hash: H256,
@@ -191,6 +208,10 @@ mod tests {
                 .unwrap()
             )
         );
+
+        let _block = client
+            .get_full_block_by_number(BlockIdentifier::AtBlock(14727266))
+            .unwrap();
 
         let transaction = client
             .get_transaction_by_hash(

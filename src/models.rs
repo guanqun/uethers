@@ -2,7 +2,7 @@ use primitive_types::{H160, H256, U256};
 use serde::Deserialize;
 
 #[derive(Debug, Clone, Deserialize)]
-pub struct BlockRpcResponse {
+pub struct BlockRpcResponseTemplate<TxType> {
     /// the block number, 'null' when it's pending block
     pub number: Option<U256>,
     /// hash of the block, 'null' when it's pending block
@@ -20,9 +20,11 @@ pub struct BlockRpcResponse {
     pub gas_limit: U256,
     /// the unix timestamp for when the block was collated
     pub timestamp: U256,
-    pub transactions: Vec<H256>,
+    pub transactions: Vec<TxType>,
     pub uncles: Vec<H256>,
 }
+pub type BlockRpcResponse = BlockRpcResponseTemplate<H256>;
+pub type FullBlockRpcResponse = BlockRpcResponseTemplate<TransactionRpcResponse>;
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct TransactionRpcResponse {
