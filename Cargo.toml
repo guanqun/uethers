@@ -1,6 +1,6 @@
 [package]
 name = "uethers"
-version = "0.5.0"
+version = "0.5.1"
 authors = ["Guanqun Lu <guanqunlu@outlook.com>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -14,9 +14,9 @@ keywords = ["ethereum"]
 
 [dependencies]
 hex = "0.4.3"
-primitive-types = { version = "0.11.1", default-features = false, features = ["serde_no_std", "rustc-hex"] }
+primitive-types = { version = "0.12.2", default-features = false, features = ["serde_no_std", "rustc-hex"] }
 serde = { version = "1", features = ["derive"] }
-ureq = { version = "2.4.0", features = ["json"] }
+ureq = { version = "2.8.0", features = ["json"] }
 
 [dev-dependencies]
-serde_json = "1.0.81"
+serde_json = "1.0"
